@@ -31,11 +31,15 @@ USE_CAMERA_STUB := true
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 TARGET_HAVE_HDMI_OUT := false
 TARGET_USES_OVERLAY := true
+
 TARGET_USES_PCI_RCS := false
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+
 TARGET_NO_BOOTLOADER := false
+
 TARGET_NO_KERNEL := false
 TARGET_NO_RADIOIMAGE := true
+
 TARGET_NO_RPC := true
 GET_FRAMEBUFFER_FORMAT_FROM_HWC := true
 
@@ -59,6 +63,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100 
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
