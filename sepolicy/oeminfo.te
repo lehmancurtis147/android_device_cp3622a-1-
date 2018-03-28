@@ -1,0 +1,7 @@
+type oeminfo, domain;
+type oeminfo_exec, exec_type, file_type;
+type oeminfo_partition_device, dev_type;
+init_daemon_domain(oeminfo)
+
+allow oeminfo oeminfo_partition_device:blk_file { open read write };
+allow oeminfo self:socket { bind create ioctl read write };

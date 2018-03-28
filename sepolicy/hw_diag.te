@@ -1,0 +1,8 @@
+type hw_diag, domain;
+type hw_diag_exec, exec_type, file_type;
+
+init_daemon_domain(hw_diag)
+
+allow hw_diag diag_device:chr_file { ioctl open read write };
+allow hw_diag self:capability dac_override;
+allow hw_diag self:socket { bind create ioctl read write };

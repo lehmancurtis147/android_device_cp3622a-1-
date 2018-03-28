@@ -1,102 +1,135 @@
-# Copyright (C) 2011 The Android Open-Source Project
+#
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# config.mk
-#
-# Product-specific compile-time definitions.
-#
 
-ifeq ($(TARGET_ARCH),)
-TARGET_ARCH := arm
-endifUSE_CAMERA_STUB := true
+include device/Coolpad/msm8909-common/BoardConfigCommon.mk
 
-BOARD_USES_GENERIC_AUDIO := true
-USE_CAMERA_STUB := true
+DEVICE_PATH := device/Coolpad/scale
+VENDOR_PATH := device/Coolpad/scale
 
-# inherit from the proprietary version
--include vendor/Coolpad/REL/BoardConfigVendor.mk
+# Audio
+USE_XML_AUDIO_POLICY_CONF := 1
 
--include $(QCPATH)/common/msm8909/BoardConfigVendor.mk
-TARGET_COMPILE_WITH_MSM_KERNEL := true
-TARGET_HAVE_HDMI_OUT := false
-TARGET_USES_OVERLAY := true
+# Assert
+TARGET_OTA_ASSERT_DEVICE := catalyst
 
-TARGET_USES_PCI_RCS := false
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+# Bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(VENDOR_PATH)/bluetooth
 
-TARGET_NO_BOOTLOADER := false
+# Camera
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
+USE_DEVICE_SPECIFIC_CAMERA := true
+BOARD_USES_LEGACY_MMAP := true
+TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
+TARGET_USE_VENDOR_CAMERA_EXT := true
+BOARD_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
 
-TARGET_NO_KERNEL := false
-TARGET_NO_RADIOIMAGE := true
+# Charger
+BOARD_CHARGER_DISABLE_INIT_BLANK := true
+BOARD_CHARGER_ENABLE_SUSPEND := true
 
+# CMHW
+BOARD_HARDWARE_CLASS += \
+    $(VENDOR_PATH)/cmhw
+TARGET_TAP_TO_WAKE_NODE := "/sys/touch_screen/easy_wakeup_gesture"
+
+# Flags
+BOARD_NO_SECURE_DISCARD := true
+
+# Memory
+MALLOC_SVELTE := true
+
+# GPS
 TARGET_NO_RPC := true
-GET_FRAMEBUFFER_FORMAT_FROM_HWC := true
+USE_DEVICE_SPECIFIC_GPS := true
 
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
-TARGET_ARCH := arm
-TARGET_NO_BOOTLOADER := true
-TARGET_BOARD_PLATFORM := unknown
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_CPU_VARIANT := cortex-a7
-TARGET_CPU_SMP := true
-ARCH_ARM_HAVE_TLS_REGISTER := true
+# Graphics
+TARGET_USE_COMPAT_GRALLOC_ALIGN := true
 
-TARGET_HARDWARE_3D := false
-TARGET_BOARD_PLATFORM := msm8909
-TARGET_BOOTLOADER_BOARD_NAME := MSM8909
+# Init
+TARGET_LIBINIT_MSM8909_DEFINES_FILE := $(VENDOR_PATH)/init/init_scale.cpp
 
+# Kernel
+TARGET_KERNEL_SOURCE := kernel/huawei/msm8916
+TARGET_KERNEL_CONFIG := lineageos_scale_defconfig
+
+# Lights
+TARGET_PROVIDES_LIBLIGHT := true
+
+# Partitions
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
-
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100 
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 earlyprintk
-BOARD_KERNEL_BASE := 0x80000000
-BOARD_KERNEL_PAGESIZE := 2048
-
-# fix this up by examining /proc/mtd on a running device
-BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00380000
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00480000
+BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00380000 # (20M)
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00480000 # (25M)
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x08c60000
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x105c0000
-BOARD_FLASH_BLOCK_SIZE := 131072
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 105c0000
+BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
-ADD_RADIO_FILES ?= true
+# Properties
+TARGET_SYSTEM_PROP := $(VENDOR_PATH)/system.prop
 
-PROTOBUF_SUPPORTED := true
+# Recovery
+TARGET_RECOVERY_DEVICE_DIRS += $(VENDOR_PATH)
 
-TARGET_USES_ION := true
-TARGET_USES_NEW_ION_API :=true
-TARGET_USES_QCOM_BSP := true
+#RECOVERY_VARIANT := twrp
+ifneq ($(RECOVERY_VARIANT),twrp)
+TARGET_RECOVERY_FSTAB := $(VENDOR_PATH)/recovery/recovery.fstab
+else
+TARGET_RECOVERY_FSTAB := $(VENDOR_PATH)/recovery/twrp.fstab
+RECOVERY_GRAPHICS_FORCE_USE_LINELENGTH := true
+DEVICE_RESOLUTION := 720x1280
+RECOVERY_SDCARD_ON_DATA := true
+TW_USE_TOOLBOX := true
+TW_NEW_ION_HEAP := true
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+TW_TARGET_USES_QCOM_BSP := true
+TW_EXTRA_LANGUAGES := true
+TW_INPUT_BLACKLIST := "accelerometer\x0alis3dh-accel"
+TARGET_RECOVERY_QCOM_RTC_FIX := true
+BOARD_SUPPRESS_SECURE_ERASE := true
+TW_INCLUDE_CRYPTO := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
+TW_NO_SCREEN_TIMEOUT := true
+# Include tzdata for recovery
+#PRODUCT_COPY_FILES += \
+#    bionic/libc/zoneinfo/tzdata:recovery/root/system/usr/share/zoneinfo/tzdata
+endif
 
-TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_msm
-TARGET_INIT_VENDOR_LIB := libinit_msm
-TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
+# RIL
+BOARD_GLOBAL_CFLAGS += -DUSE_RIL_VERSION_11
 
-HAVE_SYNAPTICS_I2C_RMI4_FW_UPGRADE := true
+# SELinux
+BOARD_SEPOLICY_DIRS += \
+    $(VENDOR_PATH)/sepolicy
 
-TARGET_LDPRELOAD := libNimsWrap.so
+# Sensors
+USE_SENSOR_MULTI_HAL := true
 
-TARGET_PER_MGR_ENABLED := true
+# Wifi
+TARGET_PROVIDES_WCNSS_QMI := true
 
-MALLOC_IMPL := dlmalloc
+# dexopt
+#ifeq ($(HOST_OS),linux)
+#    ifeq ($(TARGET_BUILD_VARIANT),user)
+#        ifeq ($(WITH_DEXPREOPT),)
+#            WITH_DEXPREOPT := true
+#            WITH_DEXPREOPT_BOOT_IMG_ONLY ?= true
+#        endif
+#    endif
+#endif
 
-TARGET_HW_DISK_ENCRYPTION := true
-
-TARGET_PREBUILT_KERNEL := device/Coolpad/REL/kernel
-
-BOARD_HAS_NO_SELECT_BUTTON := true
+# inherit from the proprietary version
+-include vendor/Coolpad/msm8909-common/BoardConfigVendor.mk
+-include vendor/Coolpad/scale/BoardConfigVendor.mk
