@@ -1,0 +1,34 @@
+# This file should be imported.
+
+#backup kph result
+on early-boot
+    start backup_kph_sh
+
+service backup_kph_sh /system/bin/sh /init.backup.kph.sh
+    class main
+    user root
+    disabled
+
+#config for mobicore startup when device boot up
+
+on property:init.svc.bootanim=stopped
+    insmod /system/lib/modules/mcDrvModule.ko
+    insmod /system/lib/modules/mcKernelApi.ko
+    chmod 0600 /dev/mobicore
+    chown system system /dev/mobicore
+    chmod 0666 /dev/mobicore-user
+    chown system system /dev/mobicore-user
+    mkdir /data/app/mcRegistry 0775 system system
+    start tsdaemon
+
+service mcStarter /system/bin/mcStarter tbase300
+    class main
+    oneshot
+
+service mcDriverDaemon /system/bin/mcDriverDaemon
+    user system
+    class main
+
+service tsdaemon /system/bin/tsdaemon
+    user system
+    group system radio
