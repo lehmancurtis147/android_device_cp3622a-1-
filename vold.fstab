@@ -1,5 +1,4 @@
-#!/system/bin/sh
-# Copyright (c) 2014, The Linux Foundation. All rights reserved.
+# Copyright (c) 2013, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -25,18 +24,9 @@
 # WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
 # OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-#
 
-# Loop through the sysfs nodes and determine
-# the correct sysfs to write the qhd resolution
-for count in 0 1 2 3 4 5 6 7 8
-do
-dir="/sys/bus/i2c/devices/5-0020/input/input"$count
-  if [ -d "$dir" ]
-  then
-	echo 540 > $dir/set_abs_x_axis
-	echo 960 > $dir/set_abs_y_axis
-  fi
-done
 
+dev_mount sdcard /storage/sdcard1 auto /devices/msm_sdcc.2/mmc_host
+
+# MTP
+#dev_mount sdcard2 /mnt/sdcard/external_sd auto /devices/platform/msm_sdcc.3/mmc_host
