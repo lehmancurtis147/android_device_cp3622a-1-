@@ -1,0 +1,35 @@
+{
+     "oem" : "CoolPad",
+     "home_dir" : "/sdcard",
+     "disable_audio_player" : true,
+     "disable_video_player" : true,
+     "disable_decompress" : true,
+     "disable_compress" : true,
+     "disable_imgviewer" : false,
+     "disable_intent_getcontent" : false,
+     "disable_intent_setwallpaper" : false,
+     "disable_intent_setringtone" : false,
+     "disable_es_share" : true,
+     "show_albumart" : false,
+     "storage_names" : [
+        {
+           "storage_path" : "/storage/emulated/0",
+           "storage_show_name" : "Internal storage",
+           "lang" : ""
+        },
+     ],
+     "disable_root_select" : true,
+     "disable_gesture" : true,
+     "disable_hide" : true,
+     "disable_disk_remain_message" : true,
+     "disable_drag" : true,
+     "disable_cloud" : true,
+     "disable_pcs" : true,
+     "disable_install_notification" : true,
+     "disable_uninstall_notification" : true,
+     "disable_history" : true,
+     "disable_app_folder_module" : true,
+     "unsupported_ringtone_format" : [
+        ".wma",".avi",".wmv",".asf",
+     ],
+ }
