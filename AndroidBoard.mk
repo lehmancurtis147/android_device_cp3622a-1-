@@ -20,6 +20,9 @@ LOCAL_PATH := $(call my-dir)
 #----------------------------------------------------------------------
 ifneq ($(strip $(TARGET_NO_BOOTLOADER)),true)
 
+# include the non-open-source counterpart to this file
+-include vendor/coolpad/cp3622a/AndroidBoardVendor.mk
+
 # Compile
 include bootable/bootloader/lk/AndroidBoot.mk
 

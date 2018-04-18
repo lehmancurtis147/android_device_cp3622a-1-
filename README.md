@@ -11,8 +11,8 @@ Memory  | 1 GB
 Shipped Android Version | 5.1.1
 Storage | 8 GB
 MicroSD | Up to 32 GB
-Battery | 2000 / 3000 mAh (removable)
-Dimensions | 142.95 x 72 x 8.5 mm 
-Display | 720 x 1280 pixels, 5.0" 
-Rear Camera  | 8.0 MP, LED flash
-Front Camera | 2.0 MP
+Battery | Li-ion 2200 mAh (removable)
+Dimensions | 145 x 71.4 x 10.9 mm, 
+Display | TFT Color (16M) 480x854px (5.0") 196ppi 
+Rear Camera  | 5.04 MPx, LED flash
+Front Camera | 1.92 MPx
