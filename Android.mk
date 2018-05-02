@@ -15,7 +15,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),scale)
+ifeq ($(TARGET_DEVICE),cp3622a)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
