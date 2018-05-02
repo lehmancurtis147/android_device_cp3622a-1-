@@ -20,10 +20,10 @@ set -e
 export INITIAL_COPYRIGHT_YEAR=2015
 
 # Required!
-export DEVICE=scale
+export DEVICE=cp3622a
 export DEVICE_COMMON=msm8909-common
 export VENDOR=Coolpad
-
+Wk
 # Load extractutils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
