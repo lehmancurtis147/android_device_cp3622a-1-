@@ -14,4 +14,4 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_scale.mk
+    $(LOCAL_DIR)/full_cp3622a.mk
