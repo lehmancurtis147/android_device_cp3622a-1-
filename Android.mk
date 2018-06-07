@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH := $(call my-dir)
+LOCAL_PATH := ($(call my-dir)/device/coolpad/cp3622a/)
 
 ifeq ($(TARGET_DEVICE),cp3622a)
 
