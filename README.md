@@ -16,3 +16,35 @@ Dimensions | 145 x 71.4 x 10.9 mm,
 Display | TFT Color (16M) 480x854px (5.0") 196ppi 
 Rear Camera  | 5.04 MPx, LED flash
 Front Camera | 1.92 MPx
+Manufacturer | Coolpad
+Model | Coolpad 3622a
+
+Product | cp3622a
+Board | cp3622a
+Platform | msm8909
+Build | 0700208
+
+
+Build type
+Tags
+Incremental
+Fingerprint
+Coolpad
+Coolpad 36229
+Coolpad
+5JJ
+22
+Lollipop
+240(hdp0
+60.0 Hz
+cp3622a
+cp3622a
+msm8909
+LNWH7V
+nRT 2.1.0
+a3a0ecBb
+user
+release-keys
+
+
+
