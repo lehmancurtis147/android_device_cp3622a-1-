@@ -13,19 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include device/Coolpad/msm8909-common/BoardConfigCommon.mk
+include device/qcom/common/BoardConfigCommon.mk
 
-DEVICE_PATH := device/Coolpad/scale
-VENDOR_PATH := device/Coolpad/scale
+DEVICE_PATH := device/coolpad/cp3622a
+VENDOR_PATH := vendor/coolpad/cp3622a
 
 # Audio
-USE_XML_AUDIO_POLICY_CONF := 1
+USE_XML_AUDIO_POLICY_CONF := true
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := catalyst
+TARGET_OTA_ASSERT_DEVICE := catalyst cp3622a 3622a
 
 # Bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(VENDOR_PATH)/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 
 # Camera
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
@@ -58,11 +58,11 @@ USE_DEVICE_SPECIFIC_GPS := true
 TARGET_USE_COMPAT_GRALLOC_ALIGN := true
 
 # Init
-TARGET_LIBINIT_MSM8909_DEFINES_FILE := $(VENDOR_PATH)/init/init_scale.cpp
+TARGET_LIBINIT_MSM8909_DEFINES_FILE := $(VENDOR_PATH)/init/init_cp3622a.cpp
 
-# Kernel
-TARGET_KERNEL_SOURCE := kernel/huawei/msm8916
-TARGET_KERNEL_CONFIG := lineageos_scale_defconfig
+
+
+
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
@@ -71,10 +71,10 @@ TARGET_PROVIDES_LIBLIGHT := true
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00380000 # (20M)
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00480000 # (25M)
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x08c60000
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 105c0000
+BOARD_BOOTIMAGE_PARTITION_SIZE := 0x01000000
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x01000000
+BOARD_SYSTEMIMAGE_PARTITION_SIZE :=
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
 # Properties
@@ -103,7 +103,7 @@ TW_INCLUDE_CRYPTO := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
 TW_NO_SCREEN_TIMEOUT := true
 # Include tzdata for recovery
-#PRODUCT_COPY_FILES += \
+# PRODUCT_COPY_FILES += \
 #    bionic/libc/zoneinfo/tzdata:recovery/root/system/usr/share/zoneinfo/tzdata
 endif
 
@@ -131,5 +131,5 @@ TARGET_PROVIDES_WCNSS_QMI := true
 #endif
 
 # inherit from the proprietary version
--include vendor/Coolpad/msm8909-common/BoardConfigVendor.mk
--include vendor/Coolpad/scale/BoardConfigVendor.mk
+
+-include vendor/coolpad/cp3622a/BoardConfigVendor.mk
